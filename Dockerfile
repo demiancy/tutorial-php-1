@@ -14,10 +14,11 @@ RUN set -xe \
     && php composer-setup.php --install-dir=/bin --filename=composer \
     && php -r "unlink('composer-setup.php');"
 
+#APACHE CONFIG
 ENV APACHE_DOCUMENT_ROOT /home/${USER}
-
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+RUN a2enmod rewrite
 
 ### SETUP CURRENT USER ###
 RUN useradd -m ${USER} --uid=${USER_UID} | chpasswd
