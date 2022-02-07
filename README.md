@@ -23,7 +23,7 @@ First you have to download the repository
 
     git clone https://github.com/demiancy/tutorial-php8-1.git
 
-The repository have the files for deploy app in Docker, with the next command you start the app in the port 80
+The repository have the files for deploy app in Docker, with the next command you start the app in the port 3000
 
     docker-compose up
 
