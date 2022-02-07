@@ -28,3 +28,7 @@ The repository have the files for deploy app in Docker, with the next command yo
     docker-compose up
 
 In case of not have Docker, you can copy the folder app into document root of your server
+
+With the following command install the dependencies 
+
+    docker-compose run php composer install
