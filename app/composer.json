@@ -1,0 +1,20 @@
+{
+    "name": "demiancy/instagram",
+    "description": "Simple app like Instagram",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Demiancy\\Instagram\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Martin Demian Gallo",
+            "email": "demiancy.dev@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "bramus/router": "~1.6"
+    }
+}

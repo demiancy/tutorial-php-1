@@ -6,12 +6,16 @@ https://www.youtube.com/watch?v=4Nuyyoc2bPI
 * PHP 8
 * MVC
 * POO
+* COMPOSER
 
 # App
 Simple app like Instagram
 
 # Features
 * User authentication
+
+# Composer packages used
+* bramus/router
 
 # Deployment
 
