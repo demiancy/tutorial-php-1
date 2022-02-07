@@ -8,6 +8,10 @@ https://www.youtube.com/watch?v=4Nuyyoc2bPI
 * POO
 * COMPOSER
 
+## Notes
+* I used Docker.
+* I changed the file structure a bit to give it a better order.
+
 # App
 Simple app like Instagram
 
