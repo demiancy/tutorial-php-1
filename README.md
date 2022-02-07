@@ -32,3 +32,5 @@ In case of not have Docker, you can copy the folder app into document root of yo
 With the following command install the dependencies 
 
     docker-compose run php composer install
+
+In the repository you have the export of the data base used in this tutorial.
