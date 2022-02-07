@@ -1,2 +1,8 @@
+#Dev files
 *.code-workspace
 app/.bash_history
+
+#Composer files
+app/.composer
+app/vendor
+app/composer.lock
