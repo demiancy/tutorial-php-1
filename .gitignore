@@ -6,3 +6,6 @@ app/.bash_history
 app/.composer
 app/vendor
 app/composer.lock
+
+app/src/config/.env
+app/logs/*

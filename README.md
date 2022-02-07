@@ -20,6 +20,7 @@ Simple app like Instagram
 
 # Composer packages used
 * bramus/router
+* vlucas/phpdotenv
 
 # Deployment
 
@@ -38,3 +39,5 @@ With the following command install the dependencies
     docker-compose run php composer install
 
 In the repository you have the export of the data base used in this tutorial.
+
+To set the data base access, you create the file app/src/config/.env (You can use .env.example as an example).

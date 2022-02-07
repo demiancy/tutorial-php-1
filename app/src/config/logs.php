@@ -1,4 +1,5 @@
 <?php
+
 // Error/Exception engine, always use E_ALL
 error_reporting(E_ALL); 
 // always use TRUE
