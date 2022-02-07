@@ -8,7 +8,7 @@ class Controller
 {
     private View $view;
 
-    function __construct()
+    public function __construct()
     {
         $this->view = new View();
     }
@@ -18,17 +18,17 @@ class Controller
         $this->view->render($view, $data);
     }
 
-    function post(string $param)
+    public function post(string $param)
     {
         return $_POST[$param] ?? NULL;
     }
 
-    function get(string $param)
+    public function get(string $param)
     {
         return $_GET[$param] ?? NULL;
     }
 
-    function file(string $param)
+    public function file(string $param)
     {
         return $_FILES[$param] ?? NULL;
     }

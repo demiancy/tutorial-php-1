@@ -11,6 +11,7 @@ https://www.youtube.com/watch?v=4Nuyyoc2bPI
 ## Notes
 * I used Docker.
 * I changed the file structure a bit to give it a better order.
+* In UtilImages added second param for folder of image store.
 
 # App
 Simple app like Instagram
