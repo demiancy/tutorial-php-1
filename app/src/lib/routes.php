@@ -1,5 +1,7 @@
 <?php
 
+use Demiancy\Instagram\controllers\Signup;
+
 $router = new \Bramus\Router\Router();
 session_start();
 
@@ -16,7 +18,8 @@ $router->post('/auth', function() {
 });
 
 $router->get('/signup', function() { 
-    echo "signup";
+    $controller = new Signup();
+    $controller->render('signup/index');
 });
 
 $router->get('/signout', function() { 

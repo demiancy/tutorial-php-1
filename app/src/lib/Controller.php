@@ -13,23 +13,28 @@ class Controller
         $this->view = new View();
     }
 
-    public function render(View $view, array $data = [])
+    public function render(string $view, array $data = [])
     {
         $this->view->render($view, $data);
     }
 
-    public function post(string $param)
+    protected function post(string $param)
     {
         return $_POST[$param] ?? NULL;
     }
 
-    public function get(string $param)
+    protected function get(string $param)
     {
         return $_GET[$param] ?? NULL;
     }
 
-    public function file(string $param)
+    protected function file(string $param)
     {
         return $_FILES[$param] ?? NULL;
+    }
+
+    protected function redirect(string $url)
+    {
+        header("location: $url");
     }
 }
