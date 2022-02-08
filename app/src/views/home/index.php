@@ -9,6 +9,8 @@
   <body>
     <div class="container">
       <h2>Home <?php echo $this->data['user']->getUsername(); ?></h2>
+
+      <?php require_once 'src/components/create.php'; ?>
     </div>
   </body>
 </html>

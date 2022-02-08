@@ -14,7 +14,8 @@ https://www.youtube.com/watch?v=4Nuyyoc2bPI
 * In UtilImages added second param for folder of image store.
 * I tried to reduce and refactor the code in several parts.
 * In post and get methods of Controller, add default value param.
-* In Controller add method currentUser.
+* In Controller, add method currentUser.
+* In User model, add methods getByUsername y getById.
 
 # App
 Simple app like Instagram

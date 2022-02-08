@@ -4,6 +4,7 @@ namespace Demiancy\Instagram\models;
 
 use Demiancy\Instagram\lib\Model;
 use Demiancy\Instagram\lib\Database;
+use Demiancy\Instagram\models\PostImage;
 use PDO;
 use PDOException;
 
@@ -18,7 +19,7 @@ class User extends Model
         private string $profile = ''
     ) {
         parent::__construct();
-        $this->posts   = [];
+        $this->posts = [];
     }
 
     public function save(): bool
@@ -48,7 +49,7 @@ class User extends Model
         return password_verify($password, $this->password);
     }
 
-    public static function get(string $username): ?User
+    public static function getByUsername(string $username): ?User
     {
         try {
             $db    = new Database;
@@ -56,23 +57,66 @@ class User extends Model
                 'SELECT * FROM users WHERE username = :username'
             );
             $query->execute(['username' => $username]);
-            $data = $query->fetch(PDO::FETCH_ASSOC);
+            
+            return $this->get($query);
 
-            if ($data == false) {
-                return null;
-            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }
 
+    public static function getById(int $id): ?User
+    {
+        try {
+            $db    = new Database;
+            $query = $db->connect()->prepare(
+                'SELECT * FROM users WHERE id = :id'
+            );
+            $query->execute(['username' => $username]);
+
+            return $this->get($query);
+
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }
+
+    public function publish(PostImage $post)
+    {
+        try {
+            $query = $this->prepare(
+                'INSERT INTO posts (user_id, title, media) VALUES (:user_id, :title, :media)'
+            );
+
+            $query->execute([
+                'user_id' => $this->getId(),
+                'title'   => $post->getTitle(),
+                'media'   => $post->getImage()
+            ]);
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function get($query): ?user
+    {
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+
+        if ($data = $query->fetch(PDO::FETCH_ASSOC)) {
             return new User(
                 $data['username'], 
                 $data['password'],
                 $data['user_id'],
                 $data['profile']
             );
-
-        } catch (PDOException $e) {
-            error_log($e->getMessage());
-            return null;
         }
+
+        return null;
     }
 
     public function setUsername(string $username)

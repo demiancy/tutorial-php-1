@@ -41,7 +41,8 @@ $router->get('/home', function() {
 });
 
 $router->post('/publish', function() { 
-    echo "publish";
+    $controller = new Home();
+    $controller->store();
 });
 
 $router->get('/profile', function() { 
