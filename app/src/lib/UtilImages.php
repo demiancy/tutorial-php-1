@@ -15,10 +15,10 @@ class UtilImages
         $check      = getimagesize($image["tmp_name"]);
 
         if (
-            ($check !== false) 
-            && (move_uploaded_file($image["tmp_name"], $targetFile)
+            ($check === false) 
+            || (!move_uploaded_file($image["tmp_name"], $targetFile))
         ) {
-            throw new Exception('Sorry, your file was not uploaded.', 1);
+            throw new \Exception('Sorry, your file was not uploaded.', 1);
         }
 
         return $hash;

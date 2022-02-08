@@ -9,3 +9,5 @@ app/composer.lock
 
 app/src/config/.env
 app/logs/*
+app/public/images/user/*
+app/public/images/post/*

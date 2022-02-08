@@ -1,6 +1,8 @@
 <?php
 
 use Demiancy\Instagram\controllers\Signup;
+use Demiancy\Instagram\controllers\Login;
+use Demiancy\Instagram\controllers\Home;
 
 $router = new \Bramus\Router\Router();
 session_start();
@@ -10,16 +12,18 @@ $router->get('/', function() {
 });
 
 $router->get('/login', function() {
-    echo "login";
+    $controller = new Login();
+    $controller->login();
 });
 
 $router->post('/auth', function() {
-    echo "auth";
+    $controller = new Login();
+    $controller->auth();
 });
 
 $router->get('/signup', function() { 
     $controller = new Signup();
-    $controller->render('signup/index');
+    $controller->signup();
 });
 
 $router->get('/signout', function() { 
@@ -27,11 +31,13 @@ $router->get('/signout', function() {
 });
 
 $router->post('/register', function() { 
-    echo "register";
+    $controller = new Signup();
+    $controller->register();
 });
 
 $router->get('/home', function() { 
-    echo "home";
+    $controller = new Home();
+    $controller->index();
 });
 
 $router->post('/publish', function() { 

@@ -13,6 +13,11 @@ class Signup extends Controller
         parent::__construct();
     }
 
+    public function signup()
+    {
+        $this->render('signup/index');
+    }
+
     public function register()
     {
         $username = $this->post('username');

@@ -3,6 +3,7 @@
 namespace Demiancy\Instagram\lib;
 
 use Demiancy\Instagram\lib\View;
+use Demiancy\Instagram\models\User;
 
 class Controller 
 {
@@ -18,14 +19,19 @@ class Controller
         $this->view->render($view, $data);
     }
 
-    protected function post(string $param)
+    protected function currentUser(): ?User
     {
-        return $_POST[$param] ?? NULL;
+        return unserialize($_SESSION['user'] ?? null);
     }
 
-    protected function get(string $param)
+    protected function post(string $param, string $default = null)
     {
-        return $_GET[$param] ?? NULL;
+        return $_POST[$param] ?? $default;
+    }
+
+    protected function get(string $param, string $default = null)
+    {
+        return $_GET[$param] ?? $default;
     }
 
     protected function file(string $param)

@@ -3,25 +3,25 @@
 namespace Demiancy\Instagram\models;
 
 use Demiancy\Instagram\lib\Model;
+use Demiancy\Instagram\lib\Database;
 use PDO;
 use PDOException;
 
 class User extends Model 
 {
-    private int $id;
     private array $posts;
-    private string $profile;
 
     public function __construct(
-        private string $name, 
-        private string $password
+        private string $username, 
+        private string $password,
+        private ?int $id = null,
+        private string $profile = ''
     ) {
+        parent::__construct();
         $this->posts   = [];
-        $this->profile = '';
-        $this->id      = null;
     }
 
-    public function save()
+    public function save(): bool
     {
         try {
             //TODO: Validate user
@@ -41,6 +41,48 @@ class User extends Model
         }
 
         return true;
+    }
+
+    public function comparePassword(string $password): bool
+    {
+        return password_verify($password, $this->password);
+    }
+
+    public static function get(string $username): ?User
+    {
+        try {
+            $db    = new Database;
+            $query = $db->connect()->prepare(
+                'SELECT * FROM users WHERE username = :username'
+            );
+            $query->execute(['username' => $username]);
+            $data = $query->fetch(PDO::FETCH_ASSOC);
+
+            if ($data == false) {
+                return null;
+            }
+
+            return new User(
+                $data['username'], 
+                $data['password'],
+                $data['user_id'],
+                $data['profile']
+            );
+
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return null;
+        }
+    }
+
+    public function setUsername(string $username)
+    {
+        $this->username = $username;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->username;
     }
 
     public function setId(int $id)
