@@ -4,8 +4,10 @@ ARG USER=docker
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-RUN apt-get update \
-    && apt-get install -y git zip
+RUN apt-get update && apt-get install -y \
+    git zip
+
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 #INSTALL COMPOSER
 RUN set -xe \
