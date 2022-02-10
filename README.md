@@ -1,5 +1,5 @@
-# tutorial-php8-1
-Tutorial of PHP 8  
+# Tutorial PHP 8 - Simple app like Instagram
+  
 https://www.youtube.com/watch?v=4Nuyyoc2bPI
 
 ## Concepts seen in the tutorial 
@@ -46,3 +46,9 @@ With the following command install the dependencies
 In the repository you have the export of the data base used in this tutorial.
 
 To set the data base access, you create the file app/src/config/.env (You can use .env.example as an example).
+
+# Screenshots
+
+![Screenshot 1](screenshot-1.png)
+![Screenshot 2](screenshot-2.png)
+![Screenshot 2](screenshot-3.png)
