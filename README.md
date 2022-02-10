@@ -15,6 +15,7 @@ https://www.youtube.com/watch?v=4Nuyyoc2bPI
 * I tried to reduce and refactor the code in several parts.
 * In post and get methods of Controller, add default value param.
 * In Controller, add method currentUser.
+* I use defer for charge the bootstrap javascript from cdn.
 
 # App
 Simple app like Instagram
