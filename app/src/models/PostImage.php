@@ -51,6 +51,30 @@ class PostImage extends Post
         return $items;
     }
 
+    public static function getById(int $post_id): ?PostImage
+    {
+        try {
+            $db    = new Database;
+            $query = $db->connect()->prepare(
+                'SELECT * FROM posts WHERE post_id = :post_id'
+            );
+            $query->execute(['post_id' => $post_id]);
+
+            if ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+                return new PostImage(
+                    $data['title'],
+                    $data['media'],
+                    User::getById($data['user_id']),
+                    $data['post_id']
+                );
+            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+        }
+
+        return null;
+    }
+
     public function setImage(string $image)
     {
         $this->image = $image;

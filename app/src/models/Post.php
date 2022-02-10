@@ -46,11 +46,11 @@ abstract class Post extends Model
         }
     }
 
-    protected function addLike(User $user)
+    public function addLike(User $user)
     {
         $like = new Like(
             $this->id,
-            $user->id
+            $user->getId()
         );
 
         $like->save();

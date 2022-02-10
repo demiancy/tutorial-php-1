@@ -3,6 +3,7 @@
 use Demiancy\Instagram\controllers\Signup;
 use Demiancy\Instagram\controllers\Login;
 use Demiancy\Instagram\controllers\Home;
+use Demiancy\Instagram\controllers\Actions;
 
 $router = new \Bramus\Router\Router();
 session_start();
@@ -54,7 +55,8 @@ $router->get('/profile/{username}', function($username) {
 });
 
 $router->post('/addLike', function() { 
-    echo "add like";
+    $controller = new Actions();
+    $controller->like();
 });
 
 $router->run();
