@@ -10,6 +10,8 @@ use PDOException;
 
 class User extends Model 
 {
+    public const PATH = 'user';
+
     private array $posts;
 
     public function __construct(
@@ -58,7 +60,7 @@ class User extends Model
             );
             $query->execute(['username' => $username]);
             
-            return $this->get($query);
+            return self::get($query);
 
         } catch (PDOException $e) {
             error_log($e->getMessage());
@@ -66,16 +68,16 @@ class User extends Model
         }
     }
 
-    public static function getById(int $id): ?User
+    public static function getById(int $user_id): ?User
     {
         try {
             $db    = new Database;
             $query = $db->connect()->prepare(
-                'SELECT * FROM users WHERE id = :id'
+                'SELECT * FROM users WHERE user_id = :user_id'
             );
-            $query->execute(['username' => $username]);
+            $query->execute(['user_id' => $user_id]);
 
-            return $this->get($query);
+            return self::get($query);
 
         } catch (PDOException $e) {
             error_log($e->getMessage());
@@ -103,10 +105,8 @@ class User extends Model
         return true;
     }
 
-    protected function get($query): ?user
+    protected static function get($query): ?user
     {
-        $data = $query->fetch(PDO::FETCH_ASSOC);
-
         if ($data = $query->fetch(PDO::FETCH_ASSOC)) {
             return new User(
                 $data['username'], 
@@ -157,6 +157,11 @@ class User extends Model
     public function getProfile(): string
     {
         return $this->profile;
+    }
+
+    public function getProfileUrl(): string
+    {
+        return 'public/images/'. self::PATH . '/' .$this->profile;
     }
 
     private function getHashedPassword()

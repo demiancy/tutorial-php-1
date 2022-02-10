@@ -15,7 +15,10 @@ class Home extends Controller
 
     public function index()
     {
-        $this->render('home/index', ['user' => $this->currentUser()]);
+        $this->render('home/index', [
+            'user'  => $this->currentUser(),
+            'posts' => PostImage::getFeed()
+        ]);
     }
 
     public function store()
@@ -24,7 +27,7 @@ class Home extends Controller
         $image = $this->file('image');
 
         if (!is_null($title) && !is_null($image)) {
-            $fileName = UtilImages::store($image, 'post');
+            $fileName = UtilImages::store($image, PostImage::PATH);
             $post     = new PostImage($title, $fileName);
 
             $this->currentUser()->publish($post);

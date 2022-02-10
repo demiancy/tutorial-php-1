@@ -15,18 +15,18 @@ abstract class Post extends Model
     public function __construct(
         private string $title, 
         private ?User $user = null,
-        private ?int $id   = null
+        private ?int $id    = null
     ) {
         parent::__construct();
         $this->likes = [];
     }
 
-    protected function fetchLikes()
+    public function fetchLikes()
     {
         $items = [];
 
         try {
-            $query = $this->db->prepare(
+            $query = $this->prepare(
                 'SELECT * FROM likes WHERE post_id = :post_id'
             );
             $query->execute(['post_id' => $this->id]);
@@ -82,7 +82,7 @@ abstract class Post extends Model
         $this->user = $user;
     }
 
-    public function getUser(): User
+    public function getUser(): ?User
     {
         return $this->user;
     }
@@ -92,7 +92,7 @@ abstract class Post extends Model
         $this->likes = $likes;
     }
 
-    public function getLikes(): array
+    public function getLikes(): int
     {
         return count($this->likes);
     }

@@ -21,7 +21,7 @@ class Login extends Controller
     {
         $username = $this->post('username');
         $password = $this->post('password', '');
-        $user     = (!is_null($username)) ? User::ByUsername($username) : null;
+        $user     = (!is_null($username)) ? User::getByUsername($username) : null;
 
         if ($user?->comparePassword($password)) {
             $_SESSION['user'] = serialize($user);
