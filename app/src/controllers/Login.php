@@ -31,4 +31,10 @@ class Login extends Controller
             $this->redirect('login');
         }
     }
+
+    public function signout()
+    {
+        unset($_SESSION['user']);
+        $this->redirect('login');
+    }
 }

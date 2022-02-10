@@ -105,6 +105,11 @@ class User extends Model
         return true;
     }
 
+    public function fetchPosts()
+    {
+        $this->posts = PostImage::getAll($this);
+    }
+
     protected static function get($query): ?user
     {
         if ($data = $query->fetch(PDO::FETCH_ASSOC)) {
@@ -161,7 +166,7 @@ class User extends Model
 
     public function getProfileUrl(): string
     {
-        return 'public/images/'. self::PATH . '/' .$this->profile;
+        return '/public/images/'. self::PATH . '/' .$this->profile;
     }
 
     private function getHashedPassword()

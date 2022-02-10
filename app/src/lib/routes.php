@@ -4,6 +4,7 @@ use Demiancy\Instagram\controllers\Signup;
 use Demiancy\Instagram\controllers\Login;
 use Demiancy\Instagram\controllers\Home;
 use Demiancy\Instagram\controllers\Actions;
+use Demiancy\Instagram\controllers\Profile;
 
 $router = new \Bramus\Router\Router();
 session_start();
@@ -28,7 +29,8 @@ $router->get('/signup', function() {
 });
 
 $router->get('/signout', function() { 
-    echo "signout";
+    $controller = new Login();
+    $controller->signout();
 });
 
 $router->post('/register', function() { 
@@ -47,11 +49,13 @@ $router->post('/publish', function() {
 });
 
 $router->get('/profile', function() { 
-    echo "profile";
+    $controller = new Profile();
+    $controller->profileCurrentUser();
 });
 
 $router->get('/profile/{username}', function($username) { 
-    echo "profile";
+    $controller = new Profile();
+    $controller->profileByUsername($username);
 });
 
 $router->post('/addLike', function() { 

@@ -51,6 +51,35 @@ class PostImage extends Post
         return $items;
     }
 
+    public static function getAll(User $user): array
+    {
+        $items = [];
+
+        try {
+            $db    = new Database;
+            $query = $db->connect()->prepare(
+                'SELECT * FROM posts WHERE user_id = :user_id ORDER BY post_id DESC'
+            );
+            $query->execute(['user_id' => $user->getId()]);
+
+            while ($post = $query->fetch(PDO::FETCH_ASSOC)) {
+                $item = new PostImage(
+                    $post['title'],
+                    $post['media'],
+                    $user,
+                    $post['post_id']
+                );
+
+                $item->fetchLikes();
+                $items[] = $item;
+            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+        }
+
+        return $items;
+    }
+
     public static function getById(int $post_id): ?PostImage
     {
         try {
@@ -87,6 +116,6 @@ class PostImage extends Post
 
     public function getImageUrl(): string
     {
-        return 'public/images/'. self::PATH . '/' .$this->image;
+        return '/public/images/'. self::PATH . '/' .$this->image;
     }
 }
